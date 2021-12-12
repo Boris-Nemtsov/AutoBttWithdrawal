@@ -1,0 +1,8 @@
+{
+	"wallet_password": "",
+	"withdrawal_waiting_strength": 1,
+	"browser": "Chrome",
+	"withdrawal_unit": 1000,
+	"foundation_min_balance": 10000,
+	"scheduler_waiting_second": 60
+}
