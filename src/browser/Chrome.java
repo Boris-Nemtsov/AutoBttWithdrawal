@@ -3,6 +3,7 @@ package browser;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -21,6 +22,8 @@ public class Chrome implements Browser{
 	public ERROR_CODE connectDriver(String options, int connectionTimeout) {
 		try {
 			System.setProperty(Strings.CHROME_WEB_DRIVER_ID, Strings.CHROME_WEB_DRIVER_PATH);
+			System.setProperty("webdriver.chrome.silentOutput", "true");
+			java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(Level.OFF);
 		} catch (Exception e) {
 			e.printStackTrace();
 			Logger.browserLogging(ERROR_CODE.FAILED_LOAD_DRIVER);
