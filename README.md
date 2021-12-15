@@ -1,10 +1,10 @@
-# AutoBttWithdrawal
+# Automatic Bittorrent Token(BTT) Withdrawal
 AutoBttWithdrawal은 일정 시간마다 재단 지갑을 확인하여 BTT를 자동으로 인출하는 프로그램입니다.
 
 ![image](https://user-images.githubusercontent.com/29080625/145715965-08404cd3-fe32-431c-8d9f-7d08995114b8.png)
 
 ## 다운로드
-JDK 버젼과 Chrome 브라우저 버젼에 따라 올바른 버젼을 다운로드 해주세요.
+JDK 버젼과 Chrome 브라우저 버젼에 따라 올바른 버젼을 다운로드 해주세요. <br/>
 JDK는 최신버젼이 설치되어 있다면 재설치 할 필요가 없습니다. Chrome 버젼은 정확하게 일치해야 합니다.
 
 + Chrome 버젼 확인
