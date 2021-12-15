@@ -15,6 +15,10 @@ import resources.Properties.PROPERTY_KEY;
 public class MyWallet {
 	private enum BROWSER_TYPE { CHROME, IE, FIREFOX }
 	
+	private static Browser BrowserDriver;
+	private static int WaitingStrength;
+	private static boolean IsReady;
+	
 	private static Browser getBrowser() {
 		BROWSER_TYPE type = BROWSER_TYPE.CHROME;
 		
@@ -28,94 +32,45 @@ public class MyWallet {
 		}
 	}
 	
-	public static void withdrawal() {		
-		Browser browser = getBrowser();
+	private static void initialize() {
+		BrowserDriver = getBrowser();
+		try {
+			WaitingStrength = Integer.parseInt(Properties.Settings.get(Properties.PROPERTY_KEY.withdrawal_waiting_strength));
+		} catch (Exception e) {
+		}
+	}
+	
+	public static void withdrawal() {	
+		Logger.normalFormatLogging(Strings.MY_WALLET_ALERT_WITHDRAWAL_START);
 
-		if (browser == null) {
+		if (IsReady == false) {
+			ready();
+		}
+		
+		IsReady = false;
+		
+		if (BrowserDriver == null) {
 			return;
 		}
 		
-		Logger.normalFormatLogging(Strings.MY_WALLET_ALERT_WITHDRAWAL_START);
-		
-		int waitingStrength = 1;
-		
-		try {
-			waitingStrength = Integer.parseInt(Properties.Settings.get(Properties.PROPERTY_KEY.withdrawal_waiting_strength));
-		} catch (Exception e) {
-		}
-		
-		if (browser.isConnected() == false) {
-			browser.connectDriver("--headless", 1000 * waitingStrength);
-		}
-		
-		browser.connectUrl("http://127.0.0.1:5001/hostui/#/wallet");
-		
-		browser.inputElement(
-				FIND_ELEMENT_BY_TYPE.XPATH, 
-				"/html/body/div/div[3]/div[2]/div/div/div[1]/div[1]/input",
-				Properties.Settings.get(PROPERTY_KEY.wallet_password),
-				FIND_ELEMENT_WAITING.TRUE, 
-				1000 * waitingStrength);
-		
-		browser.clickElement(
-				FIND_ELEMENT_BY_TYPE.XPATH, 
-				"/html/body/div/div[3]/div[2]/div/div/div[2]/button", 
-				FIND_ELEMENT_WAITING.TRUE, 
-				1000 * waitingStrength);
-		
-		browser.clickElement(
-				FIND_ELEMENT_BY_TYPE.XPATH, 
-				"/html/body/div/div[3]/div[2]/div/div[2]/div[1]/div/div[2]/button", 
-				FIND_ELEMENT_WAITING.TRUE, 
-				5000 * waitingStrength);
-		
-		threadSleep(2000 * waitingStrength);
-		
-		browser.clickElement(
-				FIND_ELEMENT_BY_TYPE.XPATH, 
-				"/html/body/div/div[3]/div[2]/div/div[2]/div[1]/div[2]/div/div[2]/div", 
-				FIND_ELEMENT_WAITING.TRUE, 
-				5000 * waitingStrength);
-		
-		browser.clickElement(
-				FIND_ELEMENT_BY_TYPE.XPATH, 
-				"/html/body/div/div[3]/div[2]/div/div[2]/div[1]/div[2]/div/div[2]/div[2]/div[1]", 
-				FIND_ELEMENT_WAITING.TRUE, 
-				1000 * waitingStrength);
-		
-		browser.inputElement(
-				FIND_ELEMENT_BY_TYPE.XPATH, 
-				"/html/body/div/div[3]/div[2]/div/div[2]/div[1]/div[2]/div/div[1]/div[1]/input",
-				 Properties.Settings.get(PROPERTY_KEY.withdrawal_unit),
-				FIND_ELEMENT_WAITING.TRUE, 
-				1000 * waitingStrength);
-
-		threadSleep(2000);
-		
-		browser.clickElement(
-				FIND_ELEMENT_BY_TYPE.XPATH, 
-				"/html/body/div/div[3]/div[2]/div/div[2]/div[1]/div[2]/div/div[3]/button", 
-				FIND_ELEMENT_WAITING.TRUE, 
-				1000 * waitingStrength);
-		
-		browser.clickElement(
+		BrowserDriver.clickElement(
 				FIND_ELEMENT_BY_TYPE.XPATH, 
 				"/html/body/div/div[3]/div[2]/div/div[2]/div[1]/div[3]/div/div[2]/div/button[2]", 
 				FIND_ELEMENT_WAITING.TRUE, 
-				1000 * waitingStrength);
+				1000 * WaitingStrength);
 		
-		browser.findElements(
+		BrowserDriver.findElements(
 				FIND_ELEMENT_BY_TYPE.XPATH, 
 				"/html/body/div/div[3]/div[2]/div/div[2]/div[1]/div[3]/div/div[2]/div/button",
 				FIND_ELEMENT_WAITING.TRUE, 
-				60000 * waitingStrength);
+				60000 * WaitingStrength);
 		
-		String result = browser.getAttributeElement(
+		String result = BrowserDriver.getAttributeElement(
 				FIND_ELEMENT_BY_TYPE.XPATH, 
 				"/html/body/div/div[3]/div[2]/div/div[2]/div[1]/div[3]/div/div[2]/p[1]",
 				"outerHTML",
 				FIND_ELEMENT_WAITING.TRUE, 
-				1000 * waitingStrength);
+				1000 * WaitingStrength);
 
 		if (result.isEmpty() == true) {
 			 Logger.normalFormatLogging(String.format(Strings.MY_WALLET_ALERT_WITHDRAWAL_END, "연결 실패"));
@@ -126,6 +81,68 @@ public class MyWallet {
 				 Logger.normalFormatLogging(String.format(Strings.MY_WALLET_ALERT_WITHDRAWAL_END, findResult.group(1)));
 			}
 		}
+		
+		ready();
+	}
+	
+	public static void ready() {
+		initialize();
+		
+		if (BrowserDriver.isConnected() == false) {
+			BrowserDriver.connectDriver("--window-size=1920,1080", 1000 * WaitingStrength);
+		}
+		
+		BrowserDriver.connectUrl("http://127.0.0.1:5001/hostui/#/wallet");
+		
+		BrowserDriver.inputElement(
+				FIND_ELEMENT_BY_TYPE.XPATH, 
+				"/html/body/div/div[3]/div[2]/div/div/div[1]/div[1]/input",
+				Properties.Settings.get(PROPERTY_KEY.wallet_password),
+				FIND_ELEMENT_WAITING.TRUE, 
+				1000 * WaitingStrength);
+		
+		BrowserDriver.clickElement(
+				FIND_ELEMENT_BY_TYPE.XPATH, 
+				"/html/body/div/div[3]/div[2]/div/div/div[2]/button", 
+				FIND_ELEMENT_WAITING.TRUE, 
+				1000 * WaitingStrength);
+		
+		BrowserDriver.clickElement(
+				FIND_ELEMENT_BY_TYPE.XPATH, 
+				"/html/body/div/div[3]/div[2]/div/div[2]/div[1]/div/div[2]/button", 
+				FIND_ELEMENT_WAITING.TRUE, 
+				5000 * WaitingStrength);
+		
+		threadSleep(2000 * WaitingStrength);
+		
+		BrowserDriver.clickElement(
+				FIND_ELEMENT_BY_TYPE.XPATH, 
+				"/html/body/div/div[3]/div[2]/div/div[2]/div[1]/div[2]/div/div[2]/div", 
+				FIND_ELEMENT_WAITING.TRUE, 
+				5000 * WaitingStrength);
+		
+		BrowserDriver.clickElement(
+				FIND_ELEMENT_BY_TYPE.XPATH, 
+				"/html/body/div/div[3]/div[2]/div/div[2]/div[1]/div[2]/div/div[2]/div[2]/div[1]", 
+				FIND_ELEMENT_WAITING.TRUE, 
+				1000 * WaitingStrength);
+		
+		BrowserDriver.inputElement(
+				FIND_ELEMENT_BY_TYPE.XPATH, 
+				"/html/body/div/div[3]/div[2]/div/div[2]/div[1]/div[2]/div/div[1]/div[1]/input",
+				 Properties.Settings.get(PROPERTY_KEY.withdrawal_unit),
+				FIND_ELEMENT_WAITING.TRUE, 
+				1000 * WaitingStrength);
+
+		threadSleep(2000);
+		
+		BrowserDriver.clickElement(
+				FIND_ELEMENT_BY_TYPE.XPATH, 
+				"/html/body/div/div[3]/div[2]/div/div[2]/div[1]/div[2]/div/div[3]/button", 
+				FIND_ELEMENT_WAITING.TRUE, 
+				1000 * WaitingStrength);
+		
+		IsReady = true;
 	}
 	
 	public static void dispose() {

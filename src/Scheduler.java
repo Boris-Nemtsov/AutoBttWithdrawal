@@ -13,6 +13,8 @@ public class Scheduler {
 	private static double lastBalance = 0;
 	
 	public static void start() {
+		MyWallet.ready();
+		
 		while (true) {
 			if (rules() == false) {
 				threadSleep(1000);
