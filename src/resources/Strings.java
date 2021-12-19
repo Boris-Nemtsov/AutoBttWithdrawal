@@ -12,7 +12,7 @@ public class Strings {
 	
 	public static final String PROPERTIES_FILE_PATH = "settings.txt";
 	
-	public static final String FOUNDATION_WALLET_API_URL = "https://apilist.tronscan.org/api/account?address=TTZu7wpHa9tnQjFUDrsjgPfXE7fck7yYs5";
+	public static final String FOUNDATION_WALLET_API_URL = "https://apilist.tronscan.org/api/account?address=TWaSm8dnvTdJQ9hcpW3g8m4QEfJspcuDwA";
 	
 	public static final String MY_WALLET_ALERT_WITHDRAWAL_START = "인출을 시작합니다.";
 	public static final String MY_WALLET_ALERT_WITHDRAWAL_END = "인출 결과 : %s";
