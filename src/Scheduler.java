@@ -17,6 +17,10 @@ public class Scheduler {
 		
 		while (true) {
 			if (rules() == false) {
+				if (MyWallet.getIsReady() == false) {
+					MyWallet.ready();
+				}
+				
 				threadSleep(1000);
 				continue;
 			}
