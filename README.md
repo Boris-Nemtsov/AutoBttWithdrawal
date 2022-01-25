@@ -36,7 +36,8 @@ scheduler_waiting_second | 60 | Waiting time after withdrawal.
 ## 사용 라이브러리
 + Chrome driver
 + Selenium server
-
++ gRCP
++ Tron-java
 
 ## 오류
 + 실행하자마자 바로 꺼지는 경우

@@ -6,6 +6,16 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="grpc-api-1.43.1.jar"/>
+	<classpathentry kind="lib" path="grpc-context-1.43.2.jar"/>
+	<classpathentry kind="lib" path="grpc-core-1.43.1.jar"/>
+	<classpathentry kind="lib" path="grpc-netty-shaded-1.43.1.jar"/>
+	<classpathentry kind="lib" path="grpc-protobuf-1.43.1.jar"/>
+	<classpathentry kind="lib" path="grpc-protobuf-lite-1.43.1.jar"/>
+	<classpathentry kind="lib" path="grpc-stub-1.43.1.jar"/>
+	<classpathentry kind="lib" path="perfmark-api-0.24.0.jar"/>
+	<classpathentry kind="lib" path="protobuf-java-4.0.0-rc-2.jar"/>
+	<classpathentry kind="lib" path="protocol-1.0.0.jar"/>
 	<classpathentry kind="lib" path="selenium-server-4.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

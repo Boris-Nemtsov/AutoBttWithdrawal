@@ -8,20 +8,19 @@ import resources.Strings;
 import utils.Logger;
 
 public class Scheduler {
-	
 	private static long lastAttempt = 0;
 	private static double lastBalance = 0;
 	
 	public static void start() {
 		MyWallet.ready();
-		
+
 		while (true) {
 			if (rules() == false) {
 				if (MyWallet.getIsReady() == false) {
 					MyWallet.ready();
 				}
 				
-				threadSleep(1000);
+				threadSleep(500);
 				continue;
 			}
 			
@@ -33,7 +32,7 @@ public class Scheduler {
 	
 	private static boolean rules() {
 		//Sleep
-		if (System.currentTimeMillis() - lastAttempt <  Integer.parseInt(Properties.Settings.get(PROPERTY_KEY.scheduler_waiting_second)) * 1000) {
+		if (System.currentTimeMillis() - lastAttempt < Integer.parseInt(Properties.Settings.get(PROPERTY_KEY.scheduler_waiting_second)) * 1000) {
 			return false;
 		}
 		
@@ -41,7 +40,7 @@ public class Scheduler {
 		double balance = FoundationWallet.getBalance();
 		if (lastBalance != balance) {
 			lastBalance = balance;
-			 Logger.normalFormatLogging(String.format(Strings.SCHEDULER_ALERT_BALANCE, new BigDecimal(String.valueOf(balance).toString()).toPlainString()));
+			Logger.normalFormatLogging(String.format(Strings.SCHEDULER_ALERT_BALANCE, new BigDecimal(String.valueOf(balance).toString()).toPlainString()));
 		}
 		
 		if (balance < Integer.parseInt(Properties.Settings.get(PROPERTY_KEY.foundation_min_balance))) {
@@ -58,5 +57,4 @@ public class Scheduler {
 			e.printStackTrace();
 		}
 	}
-	
 }

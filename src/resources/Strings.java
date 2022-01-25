@@ -12,13 +12,14 @@ public class Strings {
 	
 	public static final String PROPERTIES_FILE_PATH = "settings.txt";
 	
-	public static final String FOUNDATION_WALLET_API_URL = "https://apilist.tronscan.org/api/account?address=TWaSm8dnvTdJQ9hcpW3g8m4QEfJspcuDwA";
+	public static final String FOUNDATION_WALLET_ID = "TWaSm8dnvTdJQ9hcpW3g8m4QEfJspcuDwA";
 	
 	public static final String MY_WALLET_ALERT_WITHDRAWAL_START = "인출을 시작합니다.";
 	public static final String MY_WALLET_ALERT_WITHDRAWAL_END = "인출 결과 : %s";
 	
 	public static final String FOUNDATION_WALLET_ERROR_SUCCESS= "잔액 불러오기에 성공하였습니다.";
 	public static final String FOUNDATION_WALLET_ERROR_FAILED_LOAD_API = "잔액 불러오기에 실패하였습니다.";
+	public static final String FOUNDATION_WALLET_ERROR_CHANGE_ADDRESS = "연결에 실패하여 트론 서버를 변경합니다.";
 	
 	public static final String BROWSER_ERROR_SUCCESS = "브라우저 연결에 성공하였습니다.";
 	public static final String BROWSER_ERROR_NOT_CONNECT_DRIVER = "브라우저가 연결되지 않았습니다.";
@@ -34,5 +35,27 @@ public class Strings {
 	public static final String PROPERTIES_ERROR_SUCCESS = "설정 불러오기에 성공하였습니다.";
 	public static final String PROPERTIES_ERROR_FAILED_LOAD_PROPERTIES = "설정 불러오기에 실패하였습니다.";
 	public static final String PROPERTIES_ERROR_FILE_NOT_EXISTS = "설정 파일을 찾을 수 없습니다.";
+	
+	public static final String[] FOUNDATION_NODE_LIST = {
+			"52.53.189.99",
+			"18.196.99.16",
+			"34.253.187.192",
+			"18.133.82.227",
+			"35.180.51.163",
+			"54.252.224.209",
+			"18.231.27.82",
+			"52.15.93.92",
+			"34.220.77.106",
+			"15.207.144.3",
+			"13.124.62.58",
+			"35.182.229.162",
+			"18.209.42.127",
+			"3.218.137.187",
+			"34.237.210.82",
+			"47.241.20.47",
+			"161.117.85.97",
+			"161.117.224.116",
+			"161.117.83.38"
+	};
 	
 }

@@ -65,6 +65,9 @@ public class Logger {
 	
 	public static void foundationWalletLogging(FoundationWallet.ERROR_CODE errorCode) {
 		switch (errorCode) {
+		case CHANGE_ADDRESS:
+			normalFormatLogging(Strings.FOUNDATION_WALLET_ERROR_CHANGE_ADDRESS);
+			break;
 		case FAILED_LOAD_API:
 			normalFormatLogging(Strings.FOUNDATION_WALLET_ERROR_FAILED_LOAD_API);
 			break;
