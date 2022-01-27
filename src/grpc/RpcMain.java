@@ -42,7 +42,7 @@ public class RpcMain {
 		}
 		
 		CurrentAddressNumber = ++CurrentAddressNumber % Strings.FOUNDATION_NODE_LIST.length;
-		Builder = ManagedChannelBuilder.forAddress(Strings.FOUNDATION_NODE_LIST[CurrentAddressNumber], 50061)
+		Builder = ManagedChannelBuilder.forAddress(Strings.FOUNDATION_NODE_LIST[CurrentAddressNumber], 50051)
 			.usePlaintext()
 			.build();
 	}
@@ -52,7 +52,7 @@ public class RpcMain {
 	    
 	    getGetAccountMethod = MethodDescriptor.<Account, Account>newBuilder()
 	              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-	              .setFullMethodName(MethodDescriptor.generateFullMethodName("protocol.WalletSolidity", "GetAccount"))
+	              .setFullMethodName(MethodDescriptor.generateFullMethodName("protocol.Wallet", "GetAccount"))
 	              .setSampledToLocalTracing(true)
 	              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(Account.getDefaultInstance()))
 	              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(Account.getDefaultInstance()))

@@ -20,7 +20,7 @@ public class Scheduler {
 					MyWallet.ready();
 				}
 				
-				threadSleep(500);
+				threadSleep(200);
 				continue;
 			}
 			
